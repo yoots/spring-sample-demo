@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+										http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+                  						http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+
+	<!-- declare ehCache-->
+	<ehcache:annotation-driven />
+	
+	<ehcache:config cache-manager="cacheManager">
+		<ehcache:evict-expired-elements interval="60" />
+	</ehcache:config>
+  	
+	<!-- ehCache bean--> 
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" scope="singleton">
+		<property name="configLocation"  value="classpath:/spring/ehcache.xml"/>
+	</bean>
+    
+	<!--  DataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+
+		
+	<!-- SqlSession setup for myBATIS Database Layer -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/spring/mybatis-config.xml" />
+		<!-- Core File관련 Table SQL MAP 설정 위치 -->
+		<property name="mapperLocations">
+			<list>
+				<!-- mssql용 mapper -->
+				<value>classpath:/com/spring/demo/dao/sql/*_Sql.xml</value>
+			</list>
+		</property> 
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+</beans>

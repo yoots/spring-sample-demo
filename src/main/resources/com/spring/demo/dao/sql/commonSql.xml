@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="commonSql">
+
+	<sql id="pagingHeader">
+		SELECT *
+		FROM ( SELECT
+		<choose>
+			<when test=" orderBy != null and orderBy != '' ">
+					ROW_NUMBER()OVER(ORDER BY ${orderBy} )
+			</when>
+			<otherwise>
+				ROW_NUMBER()OVER( ORDER BY (SELECT 0) )
+			</otherwise>
+		</choose>
+		AS RNUM,
+		COUNT(*) OVER() TOT_CNT, A.* FROM (
+	</sql>
+	
+	<sql id="pagingFooter">
+		) A ) X
+		WHERE RNUM BETWEEN #{startNum} AND #{endNum}
+	</sql>
+</mapper>

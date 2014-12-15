@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Spring Quartz Scheduler job 
+	<bean name="schedulerJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.spring.demo.schedule.SampleSchedulerJob" />
+	</bean>
+	-->
+
+	<!-- Cron Trigger, run every 10 seconds -->
+	<!-- 
+		초(Seconds)	0 ~ 59 
+		분(Minutes)	0 ~ 59 
+		시간(Hours)	0 ~ 23
+		달의 날짜(Day-of-month)	1 ~ 31
+		달(Month) 	1 ~ 12 or JAN ~ DEC
+		주의 날짜(Day-of-week)	1 ~ 7 or SUN-SAT
+		년도(Year) (선택가능) 	빈값, 1970 ~ 2099
+	 
+	<bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="schedulerJob" />
+		<property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+	-->
+	
+	<!-- Quartz - DI 
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="schedulerJob" />
+			</list>
+		</property>
+
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger1" />
+			</list>
+		</property>
+	</bean>
+	-->
+	
+</beans>
