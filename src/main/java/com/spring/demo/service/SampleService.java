@@ -8,10 +8,9 @@
 package com.spring.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.spring.demo.common.Paging;
-import com.spring.demo.model.EntityMap;
-import com.spring.demo.model.ResultMap;
 
 /**
  * 이 클래스는...
@@ -21,7 +20,7 @@ import com.spring.demo.model.ResultMap;
  */
 public interface SampleService {
 	
-	List<ResultMap> getList(EntityMap entityMap);
+	public List<Map<String,Object>> getList(Map<String,Object> map);
 	
-	Paging getPagingList(Paging paging);
+	public Paging getPagingList(Paging paging);
 }

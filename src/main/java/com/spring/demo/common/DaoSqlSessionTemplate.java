@@ -214,7 +214,7 @@ public class DaoSqlSessionTemplate {
 	public Paging selectPageList(String arg0, Paging paging) {
 		
 		Map<String,Object> pageMap = new HashMap<String, Object>();
-		List<Map> listMap = sqlSession.selectList(arg0, paging.getEntityMap());
+		List<Map> listMap = sqlSession.selectList(arg0, paging.getPageMap());
 		
 		if(listMap != null && !listMap.isEmpty())
 			paging.setTotalCount(NumberUtils.toInt(ObjectUtils.toString(listMap.get(0).get("TOT_CNT"))));

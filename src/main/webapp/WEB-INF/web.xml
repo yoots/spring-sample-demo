@@ -1,49 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-	version="2.4">
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<display-name>CreWorld</display-name>
-
-	<!-- 한글 인코딩 -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-	<filter>
-		<filter-name>pageFilter</filter-name>
-		<filter-class>com.spring.demo.common.PageFilter</filter-class>
-	</filter>
-	<!--
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-  	-->
 	<!-- define Spring context file location -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:/spring/applicationContext*.xml</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-		<param-value>messages</param-value>
 	</context-param>
 
 	<!--스프링리스너 정의 -->
@@ -65,25 +28,51 @@
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
-	
+
+
+	<!-- 한글 인코딩 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>pageFilter</filter-name>
+		<filter-class>com.spring.demo.common.PageFilter</filter-class>
+	</filter>
+
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>messages</param-value>
+	</context-param>
+
 	<session-config>
 		<session-timeout>600</session-timeout>
 	</session-config>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404.jsp</location>
-    </error-page>
-    <error-page>
+	</error-page>
+	<error-page>
 		<error-code>500</error-code>
 		<location>/error/500.jsp</location>
-    </error-page>
-    <error-page>
+	</error-page>
+	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error/500.jsp</location>
 	</error-page>

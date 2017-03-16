@@ -14,11 +14,9 @@
 	<typeAliases>
 	
 		<!-- custom alias -->
-		<typeAlias alias="entityMap" type="com.spring.demo.model.EntityMap" />
-		<typeAlias alias="resultMap" type="com.spring.demo.model.ResultMap" />
 		<typeAlias alias="paging" type="com.spring.demo.common.Paging" />
-		
 		<typeAlias alias="paramMap" type="java.util.HashMap" />
+		<typeAlias alias="resultMap" type="java.util.HashMap" />
 		<typeAlias alias="hashMap" type="java.util.HashMap" />
 		<typeAlias alias="string" type="java.lang.String" />
 		<typeAlias alias="integer" type="java.lang.Integer" />

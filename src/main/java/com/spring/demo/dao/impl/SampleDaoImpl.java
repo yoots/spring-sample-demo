@@ -8,14 +8,15 @@
 package com.spring.demo.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.spring.demo.common.DaoSqlSessionTemplate;
 import com.spring.demo.common.Paging;
 import com.spring.demo.dao.SampleDao;
-import com.spring.demo.model.EntityMap;
-import com.spring.demo.model.ResultMap;
 
 /**
  * 이 클래스는...
@@ -24,24 +25,23 @@ import com.spring.demo.model.ResultMap;
  * Created on 2014. 8. 27.
  */
 @Repository
-public class SampleDaoImpl extends DaoSqlSessionTemplate implements SampleDao {
+public class SampleDaoImpl implements SampleDao {
 
-	/* (non-Javadoc)
-	 * @see com.asiana.creworld.dao.SampleDao#getList(com.asiana.creworld.model.EntityMap)
-	 */
+	@Resource(name = "sqlSessionTemplate")
+	private SqlSession sqlSession;
+    
 	@Override
-	public List<ResultMap> getList(EntityMap entityMap) {
+	public List<Map<String, Object>> getList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return selectList("sample_list", entityMap);
+		return sqlSession.selectList("sample_list", map);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.asiana.creworld.dao.SampleDao#getPagingList(com.asiana.creworld.common.Paging)
-	 */
 	@Override
 	public Paging getPagingList(Paging paging) {
 		// TODO Auto-generated method stub
-		return selectPageList("sample_paging_list", paging);
+		List<Map<String, Object>> list = sqlSession.selectList("sample_paging_list", paging);
+		
+		return paging;
 	}
 
 	

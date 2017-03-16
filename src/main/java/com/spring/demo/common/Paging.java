@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.spring.demo.model.EntityMap;
-
 /**
  * 리스트형 페이징 클래스
  *
@@ -62,19 +60,6 @@ public class Paging {
 		setRowNum();
 	}
 	
-	/**
-	 * 
-	 * @param npage
-	 * @param pageSize
-	 * @param blockSize
-	 */
-	public Paging(int pageNo, int pageSize, int blockSize , EntityMap map){
-		this.pageNo = pageNo;
-		this.pageSize = pageSize;
-		this.blockSize = blockSize;
-		this.pageMap.putAll(map.get());
-		setRowNum();
-	}
 	
 	/**
 	 * 
@@ -82,7 +67,7 @@ public class Paging {
 	 * @param pageSize
 	 * @param blockSize
 	 */
-	public Paging(int pageNo, int pageSize, int blockSize , Map map){
+	public Paging(int pageNo, int pageSize, int blockSize , Map<String,Object> map){
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.blockSize = blockSize;
@@ -97,19 +82,8 @@ public class Paging {
 	 * @param map
 	 * </pre>
 	 */
-	public void setData(Map map){
+	public void setPageMap(Map<String,Object> map){
 		this.pageMap.putAll(map);
-	}
-	
-	/**
-	 * 
-	 * <pre>
-	 * setMap
-	 * @param map
-	 * </pre>
-	 */
-	public void setEntityMap(EntityMap map){
-		this.pageMap.putAll(map.get());
 	}
 	
 	/**
@@ -119,7 +93,7 @@ public class Paging {
 	 * @return
 	 * </pre>
 	 */
-	public Map getEntityMap(){
+	public Map getPageMap(){
 		return pageMap;
 	}
 	

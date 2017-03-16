@@ -61,9 +61,19 @@
 		</tx:attributes>
 	</tx:advice>
 	
-	<!-- json output -->
-	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-	
+	<!-- ========= [ADDED FOR JSON SUPPORT] ========= -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+       <property name="messageConverters">
+           <list>
+                <ref bean="jsonConverter" />
+           </list>
+       </property>
+    </bean>
+
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+       <property name="supportedMediaTypes" value="application/json;charset=UTF-8" />
+    </bean> 
+    
 	<!-- File Uploader -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="50720000" />

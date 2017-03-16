@@ -11,16 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.demo.common.BaseController;
 import com.spring.demo.common.Paging;
-import com.spring.demo.model.EntityMap;
-import com.spring.demo.model.ResultMap;
 import com.spring.demo.service.SampleService;
 
 /**
@@ -30,45 +33,41 @@ import com.spring.demo.service.SampleService;
  * Created on 2014. 8. 26.
  */
 @Controller
-@RequestMapping(value="/board/**")
+@RequestMapping(value="/board/")
 public class BoardController extends BaseController {
 
 	@Autowired
 	SampleService sampleService;
 	
 	@RequestMapping(value="List")
-	public ModelMap list(ModelMap modelMap , EntityMap<String,Object> entityMap ) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, Map<String, Object> params ) {
 		
-		List<ResultMap> list = sampleService.getList(entityMap);
+		List<Map<String, Object>> list = sampleService.getList(params);
 		
-		Paging paging = new Paging(1, 10, 10, entityMap);
+		Paging paging = new Paging(1, 10, 10, params);
+		ModelAndView mav = new ModelAndView();
+		return mav;
 		
-		modelMap.put("list", list);
-		
-		modelMap.put("paging", sampleService.getPagingList(paging));
-		
-		return modelMap;
 	}
 	
 	@RequestMapping(value="List2")
-	public String list2( EntityMap<String,Object> entityMap ) {
+	public String list2(@RequestBody Map<String, Object> params ) {
 		
 		ModelMap modelMap = new ModelMap();
 		
-		modelMap.put("list", sampleService.getList(entityMap));
+		modelMap.put("list", sampleService.getList(params));
 		
 		return "board/List";
 	}
 	
 	@RequestMapping(value="List3.json")
-	@ResponseBody
-	public Map<String,Object> list3( EntityMap<String,Object> entityMap ) {
+	public @ResponseBody Map<String,Object> list3( @RequestBody Map<String, Object> params ) {
 		
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		
 		jsonMap.put("status", "1");
 		jsonMap.put("msg", "success");
-		jsonMap.put("list", sampleService.getList(entityMap));
+		jsonMap.put("list", sampleService.getList(params));
 		
 		return jsonMap;
 	}

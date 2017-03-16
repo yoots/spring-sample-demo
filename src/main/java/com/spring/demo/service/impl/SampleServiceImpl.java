@@ -8,14 +8,13 @@
 package com.spring.demo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.demo.common.Paging;
 import com.spring.demo.dao.SampleDao;
-import com.spring.demo.model.EntityMap;
-import com.spring.demo.model.ResultMap;
 import com.spring.demo.service.SampleService;
 
 /**
@@ -34,10 +33,10 @@ public class SampleServiceImpl implements SampleService {
 	 * @see com.asiana.creworld.service.SampleService#getList(com.asiana.creworld.model.EntityMap)
 	 */
 	@Override
-	public List<ResultMap> getList(EntityMap entityMap) {
+	public List<Map<String,Object>> getList(Map<String,Object> map) {
 		// TODO Auto-generated method stub
 		
-		return sampleDao.getList(entityMap);
+		return sampleDao.getList(map);
 	}
 
 	/* (non-Javadoc)

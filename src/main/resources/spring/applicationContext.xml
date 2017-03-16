@@ -10,17 +10,11 @@
 	<!-- 설정 파일 불러오기 DB , 암호화 -->
 	<context:property-placeholder location="classpath:/property/config.properties" />
 
-	<bean name="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="useCodeAsDefaultMessage">
-			<value>true</value>
-		</property>
-		<property name="basenames">
-			<list>
-				<value>classpath:message/messages</value>
-			</list>
-		</property>
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="cacheSeconds" value="0" />
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="WEB-INF/messages/Messages"/>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheSeconds" value="180"/>
 	</bean>
 	
 </beans>
